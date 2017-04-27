@@ -1,0 +1,9 @@
+﻿table {
+    border: 1px solid black; font-family: Arial;
+}
+thead {
+    background-color: gray;
+}
+th, td {
+    padding: 5px;
+}
