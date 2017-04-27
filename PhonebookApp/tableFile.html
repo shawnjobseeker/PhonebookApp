@@ -15,6 +15,13 @@ thead {
 th, td {
     padding: 5px;
 }
+.edit, .delete {
+    cursor: pointer;
+    padding: 2px;
+}
+.editMode {
+    border: 1px solid black;
+}
     </style>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script>
@@ -204,13 +211,51 @@ th, td {
                     liveFilterGridRows.show();
                     liveFilterGrid.show();
                 }
+
+                //
             }
+        }
+        // row edit
+        var isInEditMode = false;
+        function editRow(cell) {
+            isInEditMode = !isInEditMode;
+            cell.querySelector('img').src = (isInEditMode) ? "http://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/512/save-icon.png" : "https://cdn4.iconfinder.com/data/icons/miu/22/editor_pencil_pen_edit_write_-512.png";
+                // row is cell.parentElement
+            var editables = cell.parentElement.getElementsByTagName('div'); // td elements are NOT editable, so are wrapped with div
+            for (var i = 0; i < 3; i++) {
+               editables.item(i).contentEditable = (isInEditMode) ? "true" : "false";
+               cell.parentElement.cells.item(i).className = (isInEditMode) ? 'editMode' : '';
+                }            
+        }
+        // row delete
+        function deleteRow(cell) {
+            var row = cell.parentElement;
+            row.parentElement.deleteRow(row.rowIndex - 1);
+            isInEditMode = false;
+        }
+        // row create
+        function createRow() {
+            if (isInEditMode) {
+                alert("Finish current edit before adding a new entry.");
+                return;
+            }
+            var tb = "<tr>";
+            for ( i = 0; i < 3; i++)
+                tb += "<td class='editMode'><div contenteditable></div></td>";
+            tb += "<td class='edit' onclick='editRow(this)'><img src='http://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/512/save-icon.png' height='20' width='20' /></td>";
+            tb += "<td class='delete' onclick='deleteRow(this)'><img src='http://megaicons.net/static/img/icons_sizes/8/178/512/editing-delete-icon.png'  height='20' width='20' /></td>";
+            $("tbody:last-child").append(tb + "</tr>");
+            isInEditMode = true;
+            $("tbody:last-child td div").focus();
         }
     </script>
 </head>
 <body>
     <div >
-        <input id="filter" class="default" type="text" placeholder="Filter" /> 
+        <input id='filter' class="default" type="text" placeholder="Filter" /> 
+        <br />
+        <br />
+        <input id='new' class="create" type="button" value="Add new contact" onclick="createRow()"/>
     </div>
     <br />
     <table>
@@ -219,6 +264,7 @@ th, td {
                 <th>Name</th>
                 <th>Phone Number</th>
                 <th>Address</th>
+                <th colspan="2" />
             </tr>
         </thead>
         <tbody>

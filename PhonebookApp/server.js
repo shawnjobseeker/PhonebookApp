@@ -28,9 +28,11 @@ http.createServer(function (request, response) {
         for (var i = 0; i < obj.contacts.length; i++) {
             var contact = obj.contacts[i];
             var tb = "<tr>";
-            tb += "<td>" + contact.name + "</td>";
-            tb += "<td>" + format(contact.phone_number) + "</td>";
-            tb += "<td>" + contact.address + "</td>";
+            tb += "<td><div>" + contact.name + "</div></td>";
+            tb += "<td><div>" + format(contact.phone_number) + "</div></td>";
+            tb += "<td><div>" + contact.address + "</div></td>";
+            tb += "<td class='edit' onclick='editRow(this)'><img src='https://cdn4.iconfinder.com/data/icons/miu/22/editor_pencil_pen_edit_write_-512.png' height='20' width='20' /></td>";
+            tb += "<td class='delete' onclick='deleteRow(this)'><img src='http://megaicons.net/static/img/icons_sizes/8/178/512/editing-delete-icon.png'  height='20' width='20' /></td>";
             $("tbody").append(tb + "</tr>");
         }
         response.end($.html());
