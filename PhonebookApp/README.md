@@ -20,6 +20,6 @@ to persist changes.
 ![alt-text][delete]
 .
 
-[save]: http://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/512/save-icon.png
-[edit]: https://cdn4.iconfinder.com/data/icons/miu/22/editor_pencil_pen_edit_write_-512.png
-[delete]: http://megaicons.net/static/img/icons_sizes/8/178/512/editing-delete-icon.png
+[save]: http://icons.iconarchive.com/icons/custom-icon-design/mono-general-1/512/save-icon.png =20x20
+[edit]: https://cdn4.iconfinder.com/data/icons/miu/22/editor_pencil_pen_edit_write_-512.png =20x20
+[delete]: http://megaicons.net/static/img/icons_sizes/8/178/512/editing-delete-icon.png =20x20
